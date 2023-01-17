@@ -1,0 +1,5 @@
+const DASHBOARD_DATA_SET = 'DASHBOARD_DATA_SET';
+
+export {
+    DASHBOARD_DATA_SET
+}
