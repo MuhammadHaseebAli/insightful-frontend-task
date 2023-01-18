@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 import { configureStore } from "@reduxjs/toolkit";
 import dashboard from './reducers/dashboard';
+import editEmployee from './reducers/editEmployee';
 
 let reducer = combineReducers({
-  dashboard
+  dashboard,
+  editEmployee
 });
 
 const store = configureStore({
-    reducer
+  reducer
 });
 
 export default store;

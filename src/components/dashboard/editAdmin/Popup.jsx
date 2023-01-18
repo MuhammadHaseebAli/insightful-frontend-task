@@ -1,6 +1,7 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, memo} from 'react';
 import {
     Button, 
+    CircularProgress, 
     Dialog, 
     DialogActions, 
     DialogContent, 
@@ -8,14 +9,32 @@ import {
     DialogTitle
 } from "@mui/material";
 import EditEmployeeSection from './EditEmployeeSection';
+import { useDispatch, useSelector } from 'react-redux';
+import { SaveEmployeesData } from '../../../redux/actionCreators';
 
 const Popup = ({isOpen, setOpen, employees, selectedEmployeesIds}) => {
     const [selectedEmployees, setSelectedEmployees] = useState([]);
+    const changeEmployeesData = useSelector(state => state.editEmployee);
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const handleClose = () => {
       setOpen(false);
     };
   
+    const handleSave = () => {
+      setIsLoading(true);
+
+      dispatch(SaveEmployeesData(changeEmployeesData));
+      
+      //putting this to mock API calling experience
+      setTimeout(()=>{
+        setIsLoading(false);
+        setOpen(false);
+      },3000);
+
+    }
+
     const descriptionElementRef = useRef(null);
     useEffect(() => {
       if (isOpen) {
@@ -52,11 +71,11 @@ const Popup = ({isOpen, setOpen, employees, selectedEmployeesIds}) => {
       })}
       </DialogContentText>
     </DialogContent>
-    <DialogActions>
-      <Button onClick={handleClose}>Cancel</Button>
-      <Button onClick={handleClose}>Save</Button>
+    <DialogActions> 
+    <Button variant="contained" disabled={isLoading} onClick={handleClose}>Cancel</Button>
+      <Button variant="contained" disabled={isLoading} onClick={handleSave}>{isLoading && <CircularProgress size={20} />}Save</Button>
     </DialogActions>
   </Dialog>
 }
 
-export default Popup;
+export default memo(Popup);
