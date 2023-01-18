@@ -5,7 +5,7 @@
 - react-redux, redux-tookit 
 - Styled component (popular alternate of SCSS in React Community)
 - MaterialUI (Alternate of Angular material)
-- Lint (pre-configured react linting having basic rules like unused imports, unused declared variables, hooks practices etc)
+- Lint (pre-configured react linting having basic rules like unused imports, unused declared variables, hooks practices etc). You can run lint using "npm run lint" command to check linting warnings/errors
 
 
 ## Steps to setup the project
@@ -27,3 +27,6 @@ Start the development server
 ### `npm run build`
 
 Builds the app for production to the `build` folder.
+
+### `npm run lint`
+check linting errors/warnings
